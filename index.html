@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Home</title>\
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header" id="inicio">
+        <div class="menu container">
+            <input type="checkbox" id="menu">
+            <label for="menu">
+                <img src="" class="menu-icono" alt="Icono de menú">
+            </label>
+  
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+<!--carrusel de imagenes de las marcas destacadas-->
+        <div class="Carrusel-img">
+            <h1>Marcas Destacadas</h1>
+            <button class="carrusel-control prev" onclick="cambiarImagen(-1)" aria-label="Imagen anterior">❮</button>
+            <button class="carrusel-control next" onclick="cambiarImagen(1)" aria-label="Imagen siguiente">❯</button>
+            <div class="carrusel-container">
+                <div class="carrusel-slide">
+                    <img src="" alt="Imagen 1">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="catalogo-contenido">
+        <section class="filtros">
+            
+            <div class="filtro-grupo">
+                <label for="Tipo_de_carros">Tipo de Carros</label>
+                <select id="Tipo_de_carros">
+                    <option value="todos">Todos</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV</option>
+                    <option value="camioneta">Camioneta</option>
+             
+                </select>
+            </div>
+        </section>
+
+        <section class="productos-grid">
+            <!-- Los productos se agregarán dinámicamente desde las bases de datos -->
+        </section>
+
+
+    </main>
+
+
+
+
+
+
+
+
+    
+</body>
+</html>
