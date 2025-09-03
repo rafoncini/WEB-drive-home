@@ -1,4 +1,5 @@
-﻿// Navegación suave para los enlaces internos
+﻿// Funciones auxiliares para trabajar con Vue.js
+// Este código se ejecutará después de que Vue esté inicializado
 document.addEventListener('DOMContentLoaded', function() {
     // Navegación suave
     const links = document.querySelectorAll('a[href^="#"]');

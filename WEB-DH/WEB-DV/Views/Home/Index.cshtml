@@ -8,11 +8,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Driver Home - Tu Dealer de Confianza</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="~/css/site.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Vue.js CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
+    <!-- Contenedor principal de Vue -->
+    <div id="app">
     <!-- Header -->
     <header class="header">
         <nav class="nav">
@@ -36,7 +40,7 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <h1>Encuentra tu Auto Ideal</h1>
+            <h1>{{ message }}</h1>
             <p>La mejor selección de vehículos usados y nuevos con garantía y financiamiento</p>
             <a href="#vehiculos" class="btn btn-primary">Ver Vehículos</a>
         </div>
@@ -50,34 +54,14 @@
         <div class="container">
             <h2>Vehículos Disponibles</h2>
             <div class="vehicles-grid">
-                <div class="vehicle-card">
-                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Chevrolet Camaro">
+                <div v-for="vehiculo in vehiculos" :key="vehiculo.id" class="vehicle-card">
+                    <img :src="vehiculo.imagen" :alt="vehiculo.nombre">
                     <div class="vehicle-info">
-                        <h3>Chevrolet Camaro</h3>
-                        <p class="year">2022</p>
-                        <p class="price">$45,000</p>
-                        <p class="miles">25,000 km</p>
-                        <button class="btn btn-secondary">Ver Detalles</button>
-                    </div>
-                </div>
-                <div class="vehicle-card">
-                    <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="BMW X5">
-                    <div class="vehicle-info">
-                        <h3>BMW X5</h3>
-                        <p class="year">2021</p>
-                        <p class="price">$65,000</p>
-                        <p class="miles">18,000 km</p>
-                        <button class="btn btn-secondary">Ver Detalles</button>
-                    </div>
-                </div>
-                <div class="vehicle-card">
-                    <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Toyota Camry">
-                    <div class="vehicle-info">
-                        <h3>Toyota Camry</h3>
-                        <p class="year">2023</p>
-                        <p class="price">$35,000</p>
-                        <p class="miles">12,000 km</p>
-                        <button class="btn btn-secondary">Ver Detalles</button>
+                        <h3>{{ vehiculo.nombre }}</h3>
+                        <p class="year">{{ vehiculo.año }}</p>
+                        <p class="price">{{ vehiculo.precio }}</p>
+                        <p class="miles">{{ vehiculo.kilometraje }}</p>
+                        <button v-on:click="verDetalles(vehiculo)" class="btn btn-secondary">Ver Detalles</button>
                     </div>
                 </div>
             </div>
@@ -89,20 +73,10 @@
         <div class="container">
             <h2>Nuestros Servicios</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-car"></i>
-                    <h3>Venta de Vehículos</h3>
-                    <p>Amplia selección de autos usados y nuevos con garantía</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-tools"></i>
-                    <h3>Mantenimiento</h3>
-                    <p>Servicio técnico especializado para todas las marcas</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <h3>Financiamiento</h3>
-                    <p>Opciones de crédito flexibles y tasas competitivas</p>
+                <div v-for="servicio in servicios" :key="servicio.id" class="service-card">
+                    <i :class="servicio.icono"></i>
+                    <h3>{{ servicio.titulo }}</h3>
+                    <p>{{ servicio.descripcion }}</p>
                 </div>
             </div>
         </div>
@@ -132,11 +106,11 @@
                         <p>Lun - Vie: 9:00 AM - 6:00 PM</p>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <input type="text" placeholder="Nombre completo" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="tel" placeholder="Teléfono">
-                    <textarea placeholder="Mensaje" rows="5" required></textarea>
+                <form class="contact-form" v-on:submit.prevent="enviarFormulario">
+                    <input v-model="formulario.nombre" type="text" placeholder="Nombre completo" required>
+                    <input v-model="formulario.email" type="email" placeholder="Email" required>
+                    <input v-model="formulario.telefono" type="tel" placeholder="Teléfono">
+                    <textarea v-model="formulario.mensaje" placeholder="Mensaje" rows="5" required></textarea>
                     <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
                 </form>
             </div>
@@ -175,6 +149,88 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    </div> <!-- Fin del contenedor de Vue -->
+
+    <!-- Inicialización de Vue.js -->
+    <script>
+        const { createApp, ref } = Vue;
+        
+        const app = createApp({
+            data() {
+                return {
+                    message: 'Bienvenido a Driver Home con Vue.js',
+                    vehiculos: [
+                        {
+                            id: 1,
+                            nombre: 'Chevrolet Camaro',
+                            año: 2022,
+                            precio: '$45,000',
+                            kilometraje: '25,000 km',
+                            imagen: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+                        },
+                        {
+                            id: 2,
+                            nombre: 'BMW X5',
+                            año: 2021,
+                            precio: '$65,000',
+                            kilometraje: '18,000 km',
+                            imagen: 'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+                        },
+                        {
+                            id: 3,
+                            nombre: 'Toyota Camry',
+                            año: 2023,
+                            precio: '$35,000',
+                            kilometraje: '12,000 km',
+                            imagen: 'https://images.unsplash.com/photo-1614200187524-dc4b892acf16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+                        }
+                    ],
+                    servicios: [
+                        {
+                            id: 1,
+                            titulo: 'Venta de Vehículos',
+                            descripcion: 'Amplia selección de autos usados y nuevos con garantía',
+                            icono: 'fas fa-car'
+                        },
+                        {
+                            id: 2,
+                            titulo: 'Mantenimiento',
+                            descripcion: 'Servicio técnico especializado para todas las marcas',
+                            icono: 'fas fa-tools'
+                        },
+                        {
+                            id: 3,
+                            titulo: 'Financiamiento',
+                            descripcion: 'Opciones de crédito flexibles y tasas competitivas',
+                            icono: 'fas fa-money-bill-wave'
+                        }
+                    ],
+                    formulario: {
+                        nombre: '',
+                        email: '',
+                        telefono: '',
+                        mensaje: ''
+                    }
+                }
+            },
+            methods: {
+                verDetalles(vehiculo) {
+                    alert(`Detalles de ${vehiculo.nombre}: ${vehiculo.año}, ${vehiculo.precio}, ${vehiculo.kilometraje}`);
+                },
+                enviarFormulario() {
+                    alert(`Formulario enviado: ${this.formulario.nombre}, ${this.formulario.email}, ${this.formulario.telefono}, ${this.formulario.mensaje}`);
+                    // Aquí se podría agregar código para enviar el formulario a un servidor
+                    this.formulario.nombre = '';
+                    this.formulario.email = '';
+                    this.formulario.telefono = '';
+                    this.formulario.mensaje = '';
+                }
+            }
+        });
+        
+        app.mount('#app');
+    </script>
+    
+    <script src="~/js/site.js"></script>
 </body>
 </html>
