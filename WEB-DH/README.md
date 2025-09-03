@@ -1,4 +1,7 @@
-# 🚗 AutoMax - Sitio Web de Dealer de Carros
+
+Le dije a la ia de cursor que hiciera un Readme 
+
+# 🚗 Driver Homes - Sitio Web de Dealer de Carros
 
 Una página web moderna y responsiva para un dealer de carros, diseñada para ser simple pero atractiva.
 
