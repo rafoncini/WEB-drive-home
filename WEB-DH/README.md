@@ -1,4 +1,9 @@
 
+
+EN ESTE SEGUNDA ACTUALISACION INTEGRE VUE.JS, NO AGREGUE NINGUNA FUNCION    
+No pedi readme para esta segunda 
+
+EN LA PRIMERA UBDATE 
 Le dije a la ia de cursor que hiciera un Readme 
 
 # 🚗 Driver Homes - Sitio Web de Dealer de Carros
